@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+master_status=$(amixer get Master | tail -n 1 | awk -F'[' '{print $4}' | tr -d ']')
+
+if [ $master_status = "off" ]; then
+  amixer set Master unmute
+  amixer set Speaker unmute
+  amixer set 'Bass Speaker' unmute
+  amixer set Headphone unmute
+else
+  amixer set Master mute
+  amixer set Speaker mute
+  amixer set 'Bass Speaker' mute
+  amixer set Headphone mute
+fi
